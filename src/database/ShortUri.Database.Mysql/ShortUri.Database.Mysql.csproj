@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<RootNamespace>ShortUri.Database</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Pomelo.EntityFrameworkCore.MySql" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\infra\ShortUri.Infra.Configuration\ShortUri.Infra.Configuration.csproj" />
+	  <ProjectReference Include="..\ShortUri.Database.Shared\ShortUri.Database.Shared.csproj" />
+	</ItemGroup>
+
+</Project>

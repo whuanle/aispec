@@ -1,0 +1,14 @@
+﻿
+#pragma warning disable CA1052 // 静态容器类型应为 Static 或 NotInheritable
+namespace ShortUri.Infra.Models;
+
+/// <summary>
+/// 空数据.
+/// </summary>
+public class EmptyDto
+{
+    /// <summary>
+    /// 默认实例.
+    /// </summary>
+    public static readonly EmptyDto Default = new EmptyDto();
+}

@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<RootNamespace>ShortUri.Infra</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Yitter.IdGenerator" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\ShortUri.Infra.Configuration\ShortUri.Infra.Configuration.csproj" />
+	</ItemGroup>
+
+</Project>

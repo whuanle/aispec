@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<RootNamespace>ShortUri.Infra</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\ShortUri.Infra.Shared\ShortUri.Infra.Shared.csproj" />
+	</ItemGroup>
+
+</Project>

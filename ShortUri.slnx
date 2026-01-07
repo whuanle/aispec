@@ -1,0 +1,27 @@
+<Solution>
+  <Folder Name="/database/">
+    <Project Path="src/database/ShortUri.Database.Core/ShortUri.Database.Core.csproj" />
+    <Project Path="src/database/ShortUri.Database.Mysql/ShortUri.Database.Mysql.csproj" />
+    <Project Path="src/database/ShortUri.Database.Shared/ShortUri.Database.Shared.csproj" />
+  </Folder>
+  <Folder Name="/infra/">
+    <Project Path="src/infra/ShortUri.Infra.Configuration/ShortUri.Infra.Configuration.csproj" />
+    <Project Path="src/infra/ShortUri.Infra.Core/ShortUri.Infra.Core.csproj" />
+    <Project Path="src/infra/ShortUri.Infra.Shared/ShortUri.Infra.Shared.csproj" />
+  </Folder>
+  <Folder Name="/login/">
+    <Project Path="src/login/ShortUri.Login.Api/ShortUri.Login.Api.csproj" />
+    <Project Path="src/login/ShortUri.Login.Core/ShortUri.Login.Core.csproj" />
+    <Project Path="src/login/ShortUri.Login.Shared/ShortUri.Login.Shared.csproj" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="stylecop.json" />
+  </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/MysqlScaffold/MysqlScaffold.csproj" />
+  </Folder>
+  <Project Path="src/ShortUri/ShortUri.csproj" />
+</Solution>

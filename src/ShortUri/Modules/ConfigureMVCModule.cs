@@ -1,0 +1,97 @@
+﻿using FluentValidation;
+using Maomi;
+using Microsoft.AspNetCore.Mvc;
+using SharpGrip.FluentValidation.AutoValidation.Mvc.Extensions;
+using ShortUri.Filters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata;
+
+namespace ShortUri.Modules;
+
+/// <summary>
+/// 配置 MVC .
+/// </summary>
+public class ConfigureMVCModule : IModule
+{
+    /// <inheritdoc/>
+    public void ConfigureServices(ServiceContext context)
+    {
+        context.Services.Configure<ApiBehaviorOptions>(options =>
+        {
+            // 禁用默认的模型验证器.
+            options.SuppressModelStateInvalidFilter = true;
+        });
+
+        var mvcBuilder = context.Services.AddControllers(o =>
+        {
+            o.Filters.Add<MaomiExceptionFilter>();
+            o.Filters.Add<AutoAssignUserIdFilter>();
+            o.Conventions.Add(new ApiApplicationModelConvention("/api"));
+        }).AddJsonOptions(options =>
+        {
+            var jsonOptions = options.JsonSerializerOptions;
+            jsonOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+            jsonOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+            jsonOptions.PropertyNameCaseInsensitive = true;
+            jsonOptions.NumberHandling = JsonNumberHandling.AllowReadingFromString;
+
+            jsonOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+
+            // jsonOptions.Converters.Add(item: new DateTimeOffsetConverter());
+            jsonOptions.Converters.Add(JsonMetadataServices.DecimalConverter);
+            jsonOptions.Converters.Add(new LongStringConverter());
+        });
+
+        Validation(context);
+
+        AddApplicationParts(mvcBuilder, context);
+
+        context.Services.AddCors(options =>
+        {
+            options.AddPolicy(
+                name: "AllowSpecificOrigins",
+                policy =>
+                {
+                    policy.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+        });
+
+        context.Services.AddValidatorsFromAssemblies(context.Modules.Select(x => x.Assembly).Distinct());
+    }
+
+    private static void Validation(ServiceContext context)
+    {
+        // 模型验证
+        context.Services.AddFluentValidationAutoValidation(configuration =>
+        {
+            // 禁用 ASP.NET Core 的模型验证，代理全局统一模型验证.
+            configuration.DisableBuiltInModelValidation = true;
+            configuration.OverrideDefaultResultFactoryWith<CustomResultFactory>();
+        });
+
+        ValidatorOptions.Global.PropertyNameResolver = (type, memberInfo, expression) =>
+        {
+            var name = memberInfo?.Name;
+            if (string.IsNullOrEmpty(name))
+            {
+                return name;
+            }
+
+            return char.ToLowerInvariant(name[0]) + (name.Length > 1 ? name.Substring(1) : string.Empty);
+        };
+    }
+
+    private static void AddApplicationParts(IMvcBuilder builder, ServiceContext context)
+    {
+        foreach (var item in context.Modules)
+        {
+            if (item.Assembly.GetName().Name?.EndsWith(".Api", StringComparison.CurrentCultureIgnoreCase) == true)
+            {
+                builder.AddApplicationPart(item.Assembly);
+            }
+        }
+    }
+}

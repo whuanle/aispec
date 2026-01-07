@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<RootNamespace>ShortUri.Database</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\ShortUri.Database.Mysql\ShortUri.Database.Mysql.csproj" />
+	</ItemGroup>
+
+</Project>
