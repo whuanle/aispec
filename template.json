@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "whuanle",
+  "classifications": [
+    "Common",
+    "Console"
+  ],
+  "identity": "ShortUri",
+  "name": "ShortUri",
+  "description": "这是一个使用 Maomi.Core 搭建的模块化应用模板，适合进行 AI Spec 团队协作。",
+  "shortName": "aispec",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "ShortUri",
+  "preferNameDirectory": true
+}

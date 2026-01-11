@@ -28,10 +28,6 @@
 		<DebugType>portable</DebugType>
 	</PropertyGroup>
 
-	<PropertyGroup>
-		<RepoRoot>$([System.IO.Path]::GetDirectoryName($([MSBuild]::GetPathOfFileAbove('.gitignore', '$(MSBuildThisFileDirectory)'))))</RepoRoot>
-	</PropertyGroup>
-
 	<ItemGroup>
 		<!-- Add CLSCompliant=true to all projects by default. Projects can override. -->
 		<AssemblyAttribute Include="System.CLSCompliantAttribute">

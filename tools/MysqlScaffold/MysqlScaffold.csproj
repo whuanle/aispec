@@ -12,7 +12,11 @@
 	</ItemGroup>
 
 	<!-- 排除 Database 目录不参与编译 -->
-	
+	<ItemGroup>
+		<Compile Remove="Database\**\*.cs" />
+		<None Include="Database\**\*.cs" />
+	</ItemGroup>
+
 	<!-- t4模板，自定义实体和配置 -->
 	<ItemGroup>
 		<None Update="CodeTemplates\EFCore\DbContext.t4">
